@@ -13,13 +13,13 @@ x_fft = x_fft(1:N/2);
 
 
 %Find magnitude, phase, real part, and imaginary part
-XAbs = abs(x_fft)';
-XPhase = angle(x_fft)';
-XRe = real(x_fft)';
-XIm = imag(x_fft)';
+XAbs = abs(x_fft);
+XPhase = angle(x_fft);
+XRe = real(x_fft);
+XIm = imag(x_fft);
 
 %frequency domain
-f = (fs*(0:(N/2))/N)';
+f = (fs*(0:((N-1)/2))/N)';
 
 end
 
