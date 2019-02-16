@@ -31,9 +31,9 @@ legend('Sinusoid', 'Square Wave');
 
 %Part 3 Fourier Transform
 x=[x; zeros(22050,1)];
-x1=[x1; zeros(22050,1)];
+x2=[x1; zeros(22050,1)];
 [f,XAbs,XPhase,XRe,XIm] = computeSpectrum(x, sampling_rate_Hz);
-[f1,XAbs1,XPhase1,XRe1,XIm1] = computeSpectrum(x1, sampling_rate_Hz);
+[f1,XAbs1,XPhase1,XRe1,XIm1] = computeSpectrum(x2, sampling_rate_Hz);
 figure
 subplot(2,1,1)
 plot(f,XAbs)
@@ -55,3 +55,19 @@ subplot(2,1,2)
 plot(f,XPhase)
 xlabel('Frequency (Hz)')
 ylabel('Phase (Degrees)')
+
+%Part 4 Spectrogram
+block_size=2048;
+hop_size=1024;
+window_type = 'rect';
+figure
+[freq_vector, time_vector, magnitude_spectrogram] = mySpecgram(x1,  block_size, hop_size, sampling_rate_Hz, window_type);
+title('Spectrogram of Square wave approximation using Rectangular window');
+
+figure
+window_type = 'hann';
+[freq_vector, time_vector, magnitude_spectrogram] = mySpecgram(x1,  block_size, hop_size, sampling_rate_Hz, window_type);
+title('Spectrogram of Square wave approximation using Hanning window');
+
+figure
+spectrogram(x1, block_size, hop_size,sampling_rate_Hz);
