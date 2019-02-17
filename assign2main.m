@@ -71,3 +71,4 @@ title('Spectrogram of Square wave approximation using Hanning window');
 
 figure
 spectrogram(x1, block_size, hop_size,sampling_rate_Hz);
+
