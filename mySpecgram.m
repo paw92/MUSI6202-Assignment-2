@@ -9,14 +9,20 @@ end
 
 [t, X] = generateBlocks(x, sampling_rate_Hz, block_size, hop_size);
 
+magnitude_spectrogram = zeros(block_size/2, length(t));
+
 for i= 1:length(t)
-[f,XAbs,XPhase,XRe,XIm] = computeSpectrum(window.*X(:,i), sampling_rate_Hz);
+[f,magnitude_spectrogram(:, i),XPhase,XRe,XIm] = computeSpectrum(window.*X(:,i), sampling_rate_Hz);
 end
 
-magnitude_spectrogram = XAbs;
 freq_vector = f;
 time_vector = t;
-
-image(XAbs);
+fs = sampling_rate_Hz;
+magnitude_spectrogram = 10*log10(magnitude_spectrogram+eps);
+hndl = imagesc((t+t(2))*fs, f*2/fs, magnitude_spectrogram);
+hndl.Parent.YDir = 'normal';
+h = colorbar;
+xlabel('Samples');
+ylabel('Nomalized frequency (x \pi rad/sample)');
 
 end
